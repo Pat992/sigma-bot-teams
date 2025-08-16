@@ -25,6 +25,8 @@ $jpackageArgs = @(
     "--dest", $OutputDir
 )
 
+$jpackageArgs += @("--win-console")
+
 # Add icon if you have one
 # if (Test-Path $Icon) {
 #     $jpackageArgs += @("--icon", $Icon)
@@ -38,7 +40,7 @@ if ($LASTEXITCODE -ne 0) {
 
 # --- Move .env file ---
 $envPath = ".env"
-$targetEnvPath = Join-Path "$OutputDir\$AppName\app" ".env"
+$targetEnvPath = Join-Path "$OutputDir\$AppName" ".env"
 if (Test-Path $envPath) {
     Copy-Item $envPath $targetEnvPath -Force
     Write-Host "Copied .env to $targetEnvPath"
