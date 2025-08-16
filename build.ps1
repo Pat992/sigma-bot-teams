@@ -9,7 +9,7 @@ $OutputDir = "installer"
 # --- Build JVM Fat Jar ---
 Write-Host "Building fat jar with Gradle..."
 & .\gradlew.bat clean shadowJar
-if ($OSTEOCLASTIC -ne 0) {
+if ($LASTEXITCODE -ne 0) {
     Write-Error "Gradle build failed"
     exit 1
 }
@@ -38,7 +38,7 @@ if ($LASTEXITCODE -ne 0) {
 
 # --- Move .env file ---
 $envPath = ".env"
-$targetEnvPath = Join-Path "$OutputDir\$AppName\bin" ".env"
+$targetEnvPath = Join-Path "$OutputDir\$AppName\app" ".env"
 if (Test-Path $envPath) {
     Copy-Item $envPath $targetEnvPath -Force
     Write-Host "Copied .env to $targetEnvPath"

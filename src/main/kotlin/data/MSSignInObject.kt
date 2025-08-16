@@ -1,9 +1,9 @@
 package com.htth.sigmabotteams.data
 
 object MSSignInObject {
-    val clientId = "14d82eec-204b-4c2f-b7e8-296a70dab67e"
-    val port = 8080
-    val grantType = "authorization_code"
+    const val clientId = "14d82eec-204b-4c2f-b7e8-296a70dab67e"
+    var port = 8080
+    const val grantType = "authorization_code"
     val scopes = listOf(
         "offline_access",
         "openid",
@@ -11,11 +11,6 @@ object MSSignInObject {
         "Chat.Read",
         "ChannelMessage.Send",
         "ChatMessage.Send",
-//        "Chat.ReadWrite",
-//        "Team.ReadBasic.All",
-//        "Team.Read.All",
-//        "Channel.Read.All",
-//        "ChannelMessage.Send"
     )
 
     fun getSignInUrl() =

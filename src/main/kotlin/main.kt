@@ -19,6 +19,26 @@ suspend fun main() {
     val openAiToken = dotenv.get("OPENAI_TOKEN")
 
     printSection(
+        title = "Select Port",
+        body = "Select a port for the sign in redirect url."
+    )
+
+    MSSignInObject.port = run {
+        var chosen: Int?
+        print("Default port will be 8000: ")
+        val input = readlnOrNull()
+
+        val port = input?.trim()?.toIntOrNull()
+        if (port != null) {
+            chosen = port
+        } else {
+            println("❌ Invalid input, try again, port 8000 selected.")
+            chosen = 8000
+        }
+        chosen
+    }
+
+    printSection(
         title = "Copy URL to sign-in",
         body = MSSignInObject.getSignInUrl()
     )
