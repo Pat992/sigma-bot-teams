@@ -57,12 +57,17 @@ fun String.toMessageDtoList(me: MemberDto, sentMessages: List<String>): List<Mes
 
 fun List<MessageDto>.getIds(idList: MutableList<String>) = idList.addAll(this.map { it.id })
 
-fun List<MessageDto>.toOpenaiRequest(characterEnum: CharacterEnum, chatDto: ChatDto, language: String): String {
+fun List<MessageDto>.toOpenaiRequest(
+    characterEnum: CharacterEnum,
+    me: MemberDto,
+    chatDto: ChatDto,
+    language: String
+): String {
     val messages = this
     return Json.encodeToString(
         mapOf(
             "model" to "gpt-5",
-            "instructions" to characterEnum.toInstructions(chatDto, language),
+            "instructions" to characterEnum.toInstructions(chatDto, me, language),
             "input" to messages.toMessage()
         )
     )

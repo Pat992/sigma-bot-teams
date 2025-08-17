@@ -1,9 +1,6 @@
 package com.htth.sigmabotteams.service
 
-import com.htth.sigmabotteams.dto.ChatDto
-import com.htth.sigmabotteams.dto.ChatSettingsDto
-import com.htth.sigmabotteams.dto.MessageDto
-import com.htth.sigmabotteams.dto.toOpenaiRequest
+import com.htth.sigmabotteams.dto.*
 import com.htth.sigmabotteams.infrastructure.postRequest
 import com.htth.sigmabotteams.utils.bodyToString
 import com.htth.sigmabotteams.utils.getContent
@@ -20,11 +17,12 @@ suspend fun sendOpenAiResponseRequest(
     token: String,
     chatDto: ChatDto,
     chatSettingsDto: ChatSettingsDto,
+    me: MemberDto
 ): String = postRequest(
     url = "https://api.openai.com/v1/responses",
     headers = StringValues.build { },
     token = token,
-    body = messages.toOpenaiRequest(chatSettingsDto.character, chatDto, chatSettingsDto.language),
+    body = messages.toOpenaiRequest(chatSettingsDto.character, me, chatDto, chatSettingsDto.language),
     client = httpClient
 ).let {
     (Json

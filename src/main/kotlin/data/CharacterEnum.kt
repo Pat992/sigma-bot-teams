@@ -1,6 +1,7 @@
 package com.htth.sigmabotteams.data
 
 import com.htth.sigmabotteams.dto.ChatDto
+import com.htth.sigmabotteams.dto.MemberDto
 
 enum class CharacterEnum(val value: String, val description: String, val instructions: String) {
     DEFAULT_BOT(
@@ -40,8 +41,11 @@ enum class CharacterEnum(val value: String, val description: String, val instruc
     )
 }
 
-fun CharacterEnum.toInstructions(chatDto: ChatDto, language: String): String {
-    val memberNames = chatDto.members.map { it.name }
+fun CharacterEnum.toInstructions(chatDto: ChatDto, me: MemberDto, language: String): String {
+    val memberNames = chatDto
+        .members
+        .filter { it.id != me.id }
+        .map { it.name }
     val sentence = when (memberNames.size) {
         0 -> "You are talking with nobody"
         1 -> "You are talking with ${memberNames[0]}"

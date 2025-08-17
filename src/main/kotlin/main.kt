@@ -32,7 +32,7 @@ suspend fun main() {
         if (port != null) {
             chosen = port
         } else {
-            println("❌ Invalid input, try again, port 8000 selected.")
+            println("Invalid input, port 8000 selected.")
             chosen = 8000
         }
         chosen
@@ -76,7 +76,7 @@ suspend fun main() {
             if (index != null && index in chats.indices) {
                 chosen = chats[index]
             } else {
-                println("❌ Invalid input, try again.\n")
+                println("Invalid input, try again.\n")
             }
         } while (chosen == null)
         chosen
@@ -99,7 +99,8 @@ suspend fun main() {
                         messages,
                         openAiToken,
                         selectedChat,
-                        chatSettings
+                        chatSettings,
+                        me
                     )
 
                     printSection(
