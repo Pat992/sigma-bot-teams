@@ -73,6 +73,6 @@ fun List<MessageDto>.toOpenaiRequest(
     )
 }
 
-fun List<MessageDto>.toMessage(): String = this.joinToString("\n") {
+fun List<MessageDto>.toMessage(): String = this.reversed().joinToString("\n") {
     "${it.member.name}: ${it.content}"
 }
